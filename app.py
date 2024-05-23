@@ -1,7 +1,7 @@
 # app.py
 import tornado.ioloop
 import tornado.web
-from controllers.recipe_controller import RecipeController, RecipeProxy
+from Controllers.recipe_controller import RecipeController, RecipeProxy
 from views.recipe_view import RecipeView
 from models.recipe import Recipe
 

@@ -1,6 +1,7 @@
 # models/database.py
 import sqlite3
 
+
 class Database:
     _instance = None
 
