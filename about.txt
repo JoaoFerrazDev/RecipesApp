@@ -1,0 +1,22 @@
+Authors: Ana Rodrigues 190100383 & João Ferraz 190100423
+
+------ Recipes App -------
+
+"Social Network" for people to create and share their recipes.
+
+Design Patterns:
+
+Observer - When a user x chooses to follow another user y, when the user y makes a new recipe
+the user x will be notified
+
+Proxy - To control login access
+
+State - To determine the state of the account (Public or Private)
+
+Singleton - For the database
+
+Classes:
+
+- User
+- Recipe
+
