@@ -26,26 +26,19 @@ class Recipe:
         self.dbContext.commit()
         self.notify_observers(self)
 
-    @classmethod
-    def get_all_recipes(cls):
-        cursor = cls.
+    def get_all_recipes(self):
+        cursor = self.dbContext.get_cursor()
         cursor.execute('SELECT id, title, ingredients, instructions FROM recipes')
         rows = cursor.fetchall()
-        recipes = [cls(*row[1:]) for row in rows]
         return recipes
 
-    @classmethod
-    def get_recipe_by_id(cls, recipe_id):
-        cursor = cls.dbContext.get_cursor()
+    def get_recipe_by_id(self, recipe_id):
+        cursor = self.dbContext.get_cursor()
         cursor.execute('SELECT id, title, ingredients, instructions FROM recipes WHERE id = ?', (recipe_id,))
         row = cursor.fetchone()
-        if row:
-            return cls(*row[1:])
         return None
 
-    @classmethod
-    def delete_recipe(cls, recipe_id):
-        db = Database()
-        cursor = db.get_cursor()
+    def delete_recipe(self, recipe_id):
+        cursor = self.dbContext.get_cursor()
         cursor.execute('DELETE FROM recipes WHERE id = ?', (recipe_id,))
-        db.commit()
+        self.dbContext.commit()
