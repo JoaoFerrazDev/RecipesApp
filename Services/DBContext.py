@@ -19,9 +19,23 @@ class Database:
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT NOT NULL,
                 ingredients TEXT NOT NULL,
-                instructions TEXT NOT NULL
+                instructions TEXT NOT NULL,
+                user_id INTEGER,
+                FOREIGN KEY (user_id) REFERENCES users(id)
             )
         ''')
+
+        self._cursor.execute('''
+              CREATE TABLE IF NOT EXISTS users (
+                  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                  username TEXT NOT NULL,
+                  email TEXT NOT NULL UNIQUE,
+                  password TEXT NOT NULL,
+                  date_of_birth TEXT NOT NULL,
+                  state TEXT NOT NULL DEFAULT 'public'
+              )
+          ''')
+
         self._connection.commit()
 
     def get_cursor(self):
@@ -29,3 +43,4 @@ class Database:
 
     def commit(self):
         self._connection.commit()
+
