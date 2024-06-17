@@ -26,3 +26,15 @@ class User:
         user_id = db._cursor.lastrowid
 
         return User(user_id, username, email, password, date_of_birth)
+
+    @staticmethod
+    def login(email, password):
+        db._cursor.execute('SELECT * FROM users WHERE email = ? AND password = ?', (email, password))
+        user_data = db._cursor.fetchone()
+        if not user_data:
+            raise ValueError("Incorrect email or password")
+
+        user_id, username, email, password, date_of_birth, state = user_data
+        user = User(user_id, username, email, password, date_of_birth)
+        user.state = state
+        return user
