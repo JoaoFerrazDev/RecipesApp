@@ -1,32 +1,10 @@
-{% extends "layout.html" %}
+{% extends "../Structure/layout.html" %}
 
 {% block content %}
 <div class="container-fluid">
-    <div class="row flex-nowrap">
-
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <h1 class="fs-5 d-none d-sm-inline font-family-primary mb-5">Cook Connect</h1>
-                <div>
-                    <span>Discover</span>
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Browse</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
         <main class="col m-0 main-content">
             <img src="../../wwwroot/images/main_background_image.jpg" alt="1" class="background-main-image">
-            <form method="post" action="/registerUser" class="row justify-content-center">
+            <form method="post" action="/register" class="row justify-content-center">
                 <div class="card col-9 register-card">
                     <div class="card-body">
                         <div class="row">
@@ -38,6 +16,9 @@
                             </div>
                             <div class="col-12 form-input">
                                 <input type="email" name="email" id="email" placeholder="E-mail">
+                            </div>
+                             <div class="col-12 form-input">
+                                <input type="date" name="birth" id="birth" placeholder="Date of birth">
                             </div>
                             <div class="col-12 form-input">
                                 <input type="password" name="password" id="password" placeholder="Password">

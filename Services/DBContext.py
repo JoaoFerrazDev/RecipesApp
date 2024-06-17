@@ -44,3 +44,18 @@ class Database:
     def commit(self):
         self._connection.commit()
 
+
+def _query(query):
+    db_path = './recipes.db'
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    result = None
+
+    try:
+        cursor.execute(query)
+        result = cursor.fetchall()
+        conn.commit()
+    except Exception as e:
+        print(f'Erro na query fornecida:{e}')
+    conn.close()
+    return result
