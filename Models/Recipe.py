@@ -1,5 +1,5 @@
 # models/recipe.py
-from Services.DBContext import Database
+from Services.DBContext import Database, _query
 
 
 class Recipe:
@@ -9,7 +9,6 @@ class Recipe:
         self.title = title
         self.ingredients = ingredients
         self.instructions = instructions
-        self.dbContext = Database()
 
     @classmethod
     def add_observer(cls, observer):
@@ -21,24 +20,24 @@ class Recipe:
             observer.update(recipe)
 
     def save(self):
-        cursor = self.dbContext.get_cursor()
-        cursor.execute('INSERT INTO recipes (title, ingredients, instructions) VALUES (?, ?, ?)', (self.title, self.ingredients, self.instructions))
-        self.dbContext.commit()
-        self.notify_observers(self)
+        _query('INSERT INTO recipes (title, ingredients, instructions) VALUES (?, ?, ?)',
+               (self.title, self.ingredients, self.instructions))
 
-    def get_all_recipes(self):
-        cursor = self.dbContext.get_cursor()
-        cursor.execute('SELECT id, title, ingredients, instructions FROM recipes')
-        rows = cursor.fetchall()
+    @staticmethod
+    def get_all_recipes():
+        return _query('SELECT id, title, ingredients, instructions FROM recipes')
+
+    @staticmethod
+    def get_recipe_by_id(recipe_id):
+        return _query('SELECT id, title, ingredients, instructions FROM recipes WHERE id = ?', (recipe_id,))
+
+    @staticmethod
+    def delete_recipe(recipe_id):
+        return _query('DELETE FROM recipes WHERE id = ?', (recipe_id,))
+
+    @staticmethod
+    def get_recent_recipes():
+        recipes = _query('SELECT id, title, ingredients, instructions FROM recipes ORDER BY id DESC LIMIT 6')
         return recipes
 
-    def get_recipe_by_id(self, recipe_id):
-        cursor = self.dbContext.get_cursor()
-        cursor.execute('SELECT id, title, ingredients, instructions FROM recipes WHERE id = ?', (recipe_id,))
-        row = cursor.fetchone()
-        return None
 
-    def delete_recipe(self, recipe_id):
-        cursor = self.dbContext.get_cursor()
-        cursor.execute('DELETE FROM recipes WHERE id = ?', (recipe_id,))
-        self.dbContext.commit()

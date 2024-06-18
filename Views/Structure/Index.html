@@ -1,6 +1,21 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Welcome to the Home Page</h1>
-<p>This is the main content of the home page.</p>
+    {% if recipes %}
+        <h1>Recent Posts</h1>
+        <div class="container">
+            <div class="row">
+                {% for recipe in recipes %}
+                    <div class="col-12 col-lg-6 col-xl-4">
+                        <div class="recipe-card">
+                            <span>{{ recipe.title }}</span>
+                            <p>{{ recipe.ingredients }}</p>
+                        </div>
+                    </div>
+                {% end %}
+            </div>
+        </div>
+    {% else %}
+        <p>No recent recipes found.</p>
+    {% end %}
 {% end %}
