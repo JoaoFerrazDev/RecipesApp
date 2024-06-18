@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    {% if followers %}
+        <h1>Followers</h1>
+        <div class="container">
+            <div class="row">
+                {% for follower in followers %}
+                    <div class="col-12 col-lg-6 col-xl-4">
+                        <div class="notification-card">
+                            <span>{{ follower }}</span>
+                        </div>
+                    </div>
+                {% end %}
+            </div>
+        </div>
+    {% else %}
+        <p>No followers yet.</p>
+    {% end %}
+{% end %}

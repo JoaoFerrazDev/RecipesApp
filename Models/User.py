@@ -13,7 +13,9 @@ class User:
         self.date_of_birth = date_of_birth
         self.state = "public"  #Default state
         self.followers = []
-        self.recipes = []
+        self.subscriptions = []
+        self.recipes = [],
+        self.notifications = []
 
 
     @staticmethod
@@ -66,7 +68,9 @@ class User:
                 'date_of_birth': user.date_of_birth,
                 'state': user.state,
                 'followers': user.followers,
-                'recipes': user.recipes
+                'recipes': user.recipes,
+                'notifications': user.notifications,
+                'subscriptions': user.subscriptions
             }
         else:
             return "Invalid session token"
