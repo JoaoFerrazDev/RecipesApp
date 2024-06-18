@@ -35,7 +35,7 @@ class User:
     def login(email, password):
         user_data = _query('SELECT * FROM users WHERE email = ? AND password = ?', (email, password))
         if not user_data:
-            raise ValueError("Incorrect email or password")
+            return None
 
         user = User(*user_data[0])
         session_token = User.create_session(user)

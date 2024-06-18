@@ -18,6 +18,8 @@ class Register(RequestHandler):
         except ValueError as e:
             self.write(str(e))
             self.redirect('/register')
+
+
 class Login(RequestHandler):
     def get(self):
         self.render('Auth/Login.html')
@@ -25,6 +27,9 @@ class Login(RequestHandler):
     def post(self):
         email = self.get_argument('email')
         password = self.get_argument('password')
-        User.login(email, password)
+        session_token = User.login(email, password)
+        if not session_token:
+            self.redirect('/login')
 
+        self.set_secure_cookie("session_token", session_token)
         self.redirect('/')
