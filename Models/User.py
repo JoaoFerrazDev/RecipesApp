@@ -5,7 +5,7 @@ import uuid
 # In-memory session store
 sessions = {}
 class User:
-    def __init__(self, id, username, email, password, date_of_birth):
+    def __init__(self, id, username, email, password, date_of_birth, state):
         self.id = id
         self.username = username
         self.email = email

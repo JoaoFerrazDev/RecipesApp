@@ -1,1 +1,32 @@
 {% extends "../Structure/layout.html" %}
+
+{% block content %}
+        <div id="register-page">
+            <img src="../../static/images/lettuce.png" alt="1">
+            <form method="post" action="/login" class="row justify-content-center" >
+                <div class="card col-9 register-card">
+                    <div class="card-body">
+                        <div class="row form">
+                            <div class="col-12 text-center">
+                                <h2 class="mb-4">Login</h2>
+                            </div>
+                            <div class="col-12">
+                                 <div class=" form-input">
+                                <input type="email" name="email" id="email" placeholder="E-mail">
+                                 </div>
+                            </div>
+                            <div class="col-12 ">
+                                 <div class=" form-input">
+                                <input type="password" name="password" id="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="col-12 form-input">
+                                <button type="submit" class="btn btn-primary ms-auto">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+{% end %}
