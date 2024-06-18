@@ -1,0 +1,49 @@
+#side-menu{
+    width: 300px;
+    height: 100%;
+    overflow: auto;
+    padding: 20px 15px;
+    color:black;
+}
+
+#side-menu .title{
+    font-family: "Itim","sans-serif";
+    font-size:30px;
+    padding: 0 15px;
+    color:black;
+}
+
+main{
+    margin-left:300px;
+}
+
+.submenu .subtitle{
+     font-size:15px;
+    font-weight: 600;
+    padding: 3px 15px;
+    color:black;
+}
+.submenu li, .submenu ul, .submenu{
+     width: 100%;
+}
+.submenu li{
+    margin: 3px 0;
+}
+.submenu a{
+    background-color:white;
+    border-radius: 6px;
+    color:black;
+    padding: 8px 15px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.4s ease;
+     border:1px solid white;
+}
+.submenu a:hover{
+    border:1px solid black;
+    color:black;
+}
+.submenu a > span{
+    width: 100%;
+}

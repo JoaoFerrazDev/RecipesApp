@@ -2,7 +2,7 @@
 import tornado.ioloop
 import tornado.web
 import Views
-from Controllers import UserController
+from Controllers import UserController, HomeController
 from Services.DBContext import Database
 
 
@@ -16,7 +16,7 @@ class RegisterHandler(tornado.web.RequestHandler):
 
 def make_app():
     return tornado.web.Application([
-        (r"/", MainHandler),
+        (r"/", HomeController.HomeController),
         (r"/register", UserController.RegisterController),
     ], template_path="Views", static_path="static")
 
