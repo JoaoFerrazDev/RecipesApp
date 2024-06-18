@@ -2,6 +2,10 @@
     width: 100%;
     min-height: 100vh;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 #register-page img{
@@ -14,9 +18,20 @@
 }
 
 #register-page form{
-    border-radius: 10px;
+    border-radius: 30px;
+    background-color:#D6D2C8;
+}
+
+#register-page .btn{
+    width: fit-content;
+}
+
+#register-page .card{
+    background:#D6D2C8!important;
+    padding: 50px 40px;
 }
 
 #register-page .form-input > input {
     border-radius: 10px;
+    padding: 10px;
 }
