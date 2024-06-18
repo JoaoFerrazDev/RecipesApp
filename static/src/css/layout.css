@@ -1,5 +1,5 @@
 body{
-    font-family: "Inter",sans-serif;
+    font-family: "Inter",sans-serif !important;
 }
 
 .background-main-image {
@@ -29,3 +29,6 @@ body{
     border-radius: 10px;
 }
 
+#side-menu{
+  background-color:#D6D2C8;
+}
