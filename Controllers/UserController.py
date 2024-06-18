@@ -3,7 +3,7 @@ import datetime
 from tornado.web import RequestHandler
 from Models import User
 
-class RegisterController(RequestHandler):
+class Register(RequestHandler):
     def get(self):
         self.render('Auth/Register.html')
 
@@ -18,7 +18,7 @@ class RegisterController(RequestHandler):
         except ValueError as e:
             self.write(str(e))
             self.redirect('/register')
-class LoginController(RequestHandler):
+class Login(RequestHandler):
     def get(self):
         self.render('Auth/Login.html')
 
