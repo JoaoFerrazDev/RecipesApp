@@ -2,7 +2,7 @@
 import tornado.ioloop
 import tornado.web
 import Views
-from Controllers import UserController, HomeController, RecipesController, AuthController
+from Controllers import UserController, HomeController, RecipesController, AuthController, AccountController
 from Services.DBContext import Database
 
 
@@ -12,6 +12,7 @@ def make_app():
         (r"/register", UserController.Register),
         (r"/login", UserController.Login),
         (r"/create-recipe", AuthController.AuthProxyHandler, dict(real_handler_class=RecipesController.Create)),
+        (r"/my-recipes", AuthController.AuthProxyHandler, dict(real_handler_class=AccountController.Recipes)),
     ], template_path="Views", static_path="static", cookie_secret="QwErTy123456")
 
 

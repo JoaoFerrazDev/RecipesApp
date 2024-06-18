@@ -75,3 +75,7 @@ class User:
         else:
             return "Invalid session token"
 
+    def get_user_recipes(id):
+        recipes = _query('SELECT * FROM recipes WHERE userid == ?', (id))
+        return recipes
+
