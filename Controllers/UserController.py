@@ -1,7 +1,7 @@
 import datetime
 
 from tornado.web import RequestHandler
-from Models import User
+from Models.User import User
 
 class Register(RequestHandler):
     def get(self):

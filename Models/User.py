@@ -1,5 +1,9 @@
 import Services.DBContext as db
 from Services.DBContext import _query
+import uuid
+
+# In-memory session store
+sessions = {}
 class User:
     def __init__(self, id, username, email, password, date_of_birth):
         self.id = id
@@ -12,27 +16,58 @@ class User:
         self.recipes = []
 
 
-@staticmethod
-def register(username, email, password, date_of_birth):
-    if _query(f'SELECT * FROM users WHERE email = {email}'):
-        raise ValueError("Email already registered")
+    @staticmethod
+    def register(username, email, password, date_of_birth):
+        # Check if email is already registered
+        if _query('SELECT * FROM users WHERE email = ?', (email,)):
+            raise ValueError("Email already registered")
 
         # Insert the new user
-    _query(f'INSERT INTO users (username, email, password) VALUES ({username},{email},{password})')
+        _query('INSERT INTO users (username, email, password, date_of_birth) VALUES (?, ?, ?, ?)',
+               (username, email, password, date_of_birth))
 
-    # Get the last inserted user ID
-    user_id = _query('SELECT last_insert_rowid()')[0]
+        # Get the last inserted user ID
+        user_id = _query('SELECT last_insert_rowid()')[0][0]
 
-    return User(user_id, username, email, password, date_of_birth)
+        return User(user_id, username, email, password, date_of_birth)
 
-@staticmethod
-def login(email, password):
-    db._cursor.execute('SELECT * FROM users WHERE email = ? AND password = ?', (email, password))
-    user_data = db._cursor.fetchone()
-    if not user_data:
-        raise ValueError("Incorrect email or password")
+    @staticmethod
+    def login(email, password):
+        user_data = _query('SELECT * FROM users WHERE email = ? AND password = ?', (email, password))
+        if not user_data:
+            raise ValueError("Incorrect email or password")
 
-    user_id, username, email, password, date_of_birth, state = user_data
-    user = User(user_id, username, email, password, date_of_birth)
-    user.state = state
-    return user
+        user = User(*user_data[0])
+        session_token = User.create_session(user)
+        return session_token
+
+    @staticmethod
+    def create_session(user):
+        session_token = str(uuid.uuid4())
+        sessions[session_token] = user
+        return session_token
+
+    @staticmethod
+    def get_user_from_session(session_token):
+        return sessions.get(session_token)
+
+    @staticmethod
+    def logout(session_token):
+        if session_token in sessions:
+            del sessions[session_token]
+
+    def get_user_info(session_token):
+        user = User.get_user_from_session(session_token)
+        if user:
+            return {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+                'date_of_birth': user.date_of_birth,
+                'state': user.state,
+                'followers': user.followers,
+                'recipes': user.recipes
+            }
+        else:
+            return "Invalid session token"
+
