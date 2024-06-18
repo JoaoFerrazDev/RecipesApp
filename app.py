@@ -2,7 +2,7 @@
 import tornado.ioloop
 import tornado.web
 import Views
-from Controllers import UserController, HomeController
+from Controllers import UserController, HomeController, RecipesController
 from Services.DBContext import Database
 
 
@@ -11,6 +11,7 @@ def make_app():
         (r"/", HomeController.Home),
         (r"/register", UserController.Register),
         (r"/login", UserController.Login),
+        (r"/create-recipe", RecipesController.Create),
     ], template_path="Views", static_path="static")
 
 if __name__ == "__main__":

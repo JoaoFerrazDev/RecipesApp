@@ -5,8 +5,10 @@ from Services.DBContext import Database, _query
 class Recipe:
     _observers = []
 
-    def __init__(self, title, ingredients, instructions):
+    def __init__(self, title, description, image, ingredients, instructions):
         self.title = title
+        self.description = description
+        self.image = image
         self.ingredients = ingredients
         self.instructions = instructions
 
@@ -20,24 +22,28 @@ class Recipe:
             observer.update(recipe)
 
     def save(self):
-        _query('INSERT INTO recipes (title, ingredients, instructions) VALUES (?, ?, ?)',
-               (self.title, self.ingredients, self.instructions))
+        query = f'''
+            INSERT INTO recipes (title, description, image, ingredients, instructions)
+            VALUES ('{self.title}', '{self.description}', '{self.image}', '{self.ingredients}', '{self.instructions}')
+        '''
+        _query(query)
 
     @staticmethod
     def get_all_recipes():
-        return _query('SELECT id, title, ingredients, instructions FROM recipes')
+        query = 'SELECT id, title, description, image, ingredients, instructions FROM recipes'
+        return _query(query)
 
     @staticmethod
     def get_recipe_by_id(recipe_id):
-        return _query('SELECT id, title, ingredients, instructions FROM recipes WHERE id = ?', (recipe_id,))
+        query = f'SELECT id, title, description, image, ingredients, instructions FROM recipes WHERE id = {recipe_id}'
+        return _query(query)
 
     @staticmethod
     def delete_recipe(recipe_id):
-        return _query('DELETE FROM recipes WHERE id = ?', (recipe_id,))
+        query = f'DELETE FROM recipes WHERE id = {recipe_id}'
+        return _query(query)
 
     @staticmethod
     def get_recent_recipes():
-        recipes = _query('SELECT id, title, ingredients, instructions FROM recipes ORDER BY id DESC LIMIT 6')
-        return recipes
-
-
+        query = 'SELECT id, title, description, image, ingredients, instructions FROM recipes ORDER BY id DESC LIMIT 6'
+        return _query(query)
