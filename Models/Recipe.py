@@ -22,11 +22,11 @@ class Recipe:
             observer.update(recipe)
 
     def save(self):
-        query = f'''
+        query = '''
             INSERT INTO recipes (title, description, image, ingredients, instructions)
-            VALUES ('{self.title}', '{self.description}', '{self.image}', '{self.ingredients}', '{self.instructions}')
+            VALUES (?, ?, ?, ?, ?)
         '''
-        _query(query)
+        _query(query, (self.title, self.description, self.image, self.ingredients, self.instructions))
 
     @staticmethod
     def get_all_recipes():
@@ -35,13 +35,13 @@ class Recipe:
 
     @staticmethod
     def get_recipe_by_id(recipe_id):
-        query = f'SELECT id, title, description, image, ingredients, instructions FROM recipes WHERE id = {recipe_id}'
-        return _query(query)
+        query = 'SELECT id, title, description, image, ingredients, instructions FROM recipes WHERE id = ?'
+        return _query(query, (recipe_id,))
 
     @staticmethod
     def delete_recipe(recipe_id):
-        query = f'DELETE FROM recipes WHERE id = {recipe_id}'
-        return _query(query)
+        query = 'DELETE FROM recipes WHERE id = ?'
+        return _query(query, (recipe_id,))
 
     @staticmethod
     def get_recent_recipes():

@@ -14,6 +14,7 @@ def make_app():
         (r"/profile/(\d+)", UserController.Profile),
         (r"/create-recipe", AuthController.AuthProxyHandler, dict(real_handler_class=RecipesController.Create)),
         (r"/my-recipes", AuthController.AuthProxyHandler, dict(real_handler_class=AccountController.Recipes)),
+        (r"/recipe/(\d+)", RecipesController.RecipePage),
     ], template_path="Views", static_path="static", cookie_secret="QwErTy123456")
 
 

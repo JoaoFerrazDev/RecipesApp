@@ -8,13 +8,15 @@
                 {% for recipe in recipes %}
                     <div class="col-12 col-lg-6 col-xl-4">
                           <div class="recipe-card">
-                                 {% if recipe[3] %}
-                                <img src="{{ recipe[3] }}">
-                                {% else %}
-                                <img src="/static/images/nologo.png">
-                                {% end %}
-                                <span>{{ recipe[1] }}</span>
-                                <p>{{ recipe[2] }}</p>
+                              <a href="/recipe/{{ recipe[0] }}">
+                                    {% if recipe[3] %}
+                                    <img src="{{ recipe[3] }}">
+                                    {% else %}
+                                    <img src="/static/images/nologo.png">
+                                    {% end %}
+                                    <span>{{ recipe[1] }}</span>
+                                    <p>{{ recipe[2] }}</p>
+                              </a>
                             </div>
                     </div>
                 {% end %}

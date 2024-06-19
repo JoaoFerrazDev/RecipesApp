@@ -56,3 +56,11 @@ class Create(RequestHandler):
         except Exception as e:
             print(f"Error saving image: {str(e)}")
             return ''
+
+
+class RecipePage(RequestHandler):
+    def get(self, id):
+        print("recipe")
+        recipe = Recipe.get_recipe_by_id(id)
+        print(f"Debug: Query Result for recipe_id {id} -> {recipe[0]}")
+        self.render('Recipe/Index.html', recipe=recipe)

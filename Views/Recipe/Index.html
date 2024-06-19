@@ -1,0 +1,24 @@
+{% extends "../Structure/layout.html" %}
+
+{% block content %}
+    {% if recipe %}
+        <h2>Recipes</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 col-xl-4">
+                      <div class="recipe-card">
+                             {% if recipe[0][0] %}
+                            <img src="{{ recipe[0][0] }}">
+                            {% else %}
+                            <img src="/static/images/nologo.png">
+                            {% end %}
+                            <span>{{ recipe[0][1] }}</span>
+                            <p>{{ recipe[0][2] }}</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>No recipe found.</p>
+    {% end %}
+{% end %}
