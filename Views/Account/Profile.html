@@ -1,15 +1,15 @@
-{% extends "layout.html" %}
+{% extends "../Structure/layout.html" %}
 
 {% block content %}
     <div class="row">
         <div class="col-4">
             <div class="profile-picture">
-                <img src="{{ user_info.image }}" alt="User Image">
+                <img src="" alt="User Image">
             </div>
         </div>
         <div class="col-8">
-            <div class="num-of-followers">Followers : {{ user_info.followers }}</div>
-            <div class="num-of-following">Following : 1000</div>
+            <div class="num-of-followers">Followers : 1000</div>
+            <div class="num-of-following">Following : {{ user_info.followers }}</div>
         </div>
     </div>
 {% end %}

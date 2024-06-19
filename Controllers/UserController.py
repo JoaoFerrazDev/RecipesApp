@@ -39,5 +39,5 @@ class Profile(RequestHandler):
 
     def get(self, id):
         user_info = User.get_user_profile(id)
-        self.render('Auth/Profile.html', user_info=user_info)
+        self.render('Account/Profile.html', user_info=user_info)
 

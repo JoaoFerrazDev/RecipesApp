@@ -42,7 +42,7 @@ class Database:
                       CREATE TABLE IF NOT EXISTS followers (
                           id INTEGER PRIMARY KEY AUTOINCREMENT,
                           follower int NOT NULL,
-                          following int NOT NULL,
+                          following int NOT NULL
                       )
                   ''')
 

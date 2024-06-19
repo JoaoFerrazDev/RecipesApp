@@ -5,7 +5,7 @@ import uuid
 # In-memory session store
 sessions = {}
 class User:
-    def __init__(self, id, username, email, password, date_of_birth, state):
+    def __init__(self, id, username, email, password, date_of_birth, state, num_of_followers=0):
         self.id = id
         self.username = username
         self.email = email
@@ -13,6 +13,7 @@ class User:
         self.date_of_birth = date_of_birth
         self.state = "public"  #Default state
         self.followers = []
+        self.numOfFollowers = num_of_followers
         self.subscriptions = []
         self.recipes = [],
         self.notifications = []
@@ -80,5 +81,7 @@ class User:
         return recipes
 
     def get_user_profile(id):
-        user_info = _query('SELECT * FROM users WHERE id == ?', (id))
+        user_data = _query('SELECT u.*, COUNT(f.follower) AS followers FROM users u LEFT JOIN followers f ON f.follower = u.id WHERE u.id == ? GROUP BY u.id;', (id))
+        user_info = User(*user_data[0])
+        print(user_info)
         return user_info
