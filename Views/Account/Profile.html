@@ -1,15 +1,17 @@
 {% extends "../Structure/layout.html" %}
 
 {% block content %}
+<div class="container pt-5">
     <div class="row">
-        <div class="col-4">
+        <div class="col-4 d-flex justify-content-center">
             <div class="profile-picture">
                 <img src="" alt="User Image">
             </div>
         </div>
-        <div class="col-8">
-            <div class="num-of-followers">Followers : 1000</div>
-            <div class="num-of-following">Following : {{ user_info.followers }}</div>
+        <div class="col-8 d-flex justify-content-center">
+            <div class="num-of-followers">Followers : {{ user_info.numOfFollowers }}</div>
+            <div class="num-of-following">Following : {{ user_info.numOfFollowing }}</div>
         </div>
     </div>
+</div>
 {% end %}
