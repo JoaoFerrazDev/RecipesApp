@@ -5,8 +5,12 @@ from Models.User import User
 class Recipes(RequestHandler):
     def get(self):
         session_token = self.get_secure_cookie("session_token")
-        recipes = User.get_user_recipes(User.get_user_info().get("id"))
-        self.render('Recipes/Index.html', recipes=recipes)
+
+        if session_token:
+            session_token = session_token.decode('utf-8')
+            user_info = User.get_user_info(session_token)
+            recipes = User.get_user_recipes(user_info.id)
+            self.render('Recipes/Index.html', recipes=recipes)
 
 class Notifications(RequestHandler):
     def get(self):

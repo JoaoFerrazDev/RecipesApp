@@ -42,3 +42,27 @@ h2{
     background-color:black!important;
     border-color:black!important;
 }
+
+.recipe-card{
+    margin-bottom: 30px;
+    img{
+        width: 100%;
+        aspect-ratio: 3/2;
+        object-fit: cover;
+        border-radius: 10px;
+
+    }
+    span{
+        margin-top:10px;
+        display: block;
+        font-size:18px;
+        color:black;
+        font-weight: 600;
+        text-align: left;
+    }
+    p{
+        color:#828282;
+        font-size:16px;
+        text-align: left;
+    }
+}
