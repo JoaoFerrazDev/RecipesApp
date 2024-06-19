@@ -2,15 +2,20 @@
 
 {% block content %}
     {% if recipes %}
-        <h1>Followers</h1>
+        <h1>Recipes</h1>
         <div class="container">
             <div class="row">
                 {% for recipe in recipes %}
                     <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="notification-card">
-                             <span>{{ recipe[1] }}</span>
+                          <div class="recipe-card">
+                                 {% if recipe[3] %}
+                                <img src="{{ recipe[3] }}">
+                                {% else %}
+                                <img src="/static/images/nologo.png">
+                                {% end %}
+                                <span>{{ recipe[1] }}</span>
                                 <p>{{ recipe[2] }}</p>
-                        </div>
+                            </div>
                     </div>
                 {% end %}
             </div>
