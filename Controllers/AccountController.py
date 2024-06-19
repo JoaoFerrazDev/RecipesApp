@@ -9,7 +9,7 @@ class Recipes(RequestHandler):
         if session_token:
             session_token = session_token.decode('utf-8')
             user_info = User.get_user_info(session_token)
-            recipes = User.get_user_recipes(user_info.id)
+            recipes = User.get_user_recipes(user_info['id'])
             self.render('Recipes/Index.html', recipes=recipes)
 
 class Notifications(RequestHandler):
