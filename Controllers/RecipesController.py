@@ -1,12 +1,11 @@
-from tornado.web import RequestHandler
-
 from Models.Recipe import Recipe
 from Models.User import User
 import os
 from PIL import Image
+from Controllers.BaseController import BaseHandler
 
 
-class Create(RequestHandler):
+class Create(BaseHandler):
     def get(self):
         self.render('Recipes/Create.html')
 
@@ -58,7 +57,7 @@ class Create(RequestHandler):
             return ''
 
 
-class RecipePage(RequestHandler):
+class RecipePage(BaseHandler):
     def get(self, id):
         print("recipe")
         recipe = Recipe.get_recipe_by_id(id)

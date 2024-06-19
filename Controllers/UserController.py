@@ -1,9 +1,9 @@
 import datetime
-from tornado.web import RequestHandler
 from Models.User import User
+from Controllers.BaseController import BaseHandler
 
 
-class Register(RequestHandler):
+class Register(BaseHandler):
     def get(self):
         self.render('Auth/Register.html')
 
@@ -20,7 +20,7 @@ class Register(RequestHandler):
             self.redirect('/register')
 
 
-class Login(RequestHandler):
+class Login(BaseHandler):
     def get(self):
         self.render('Auth/Login.html')
 
@@ -35,9 +35,10 @@ class Login(RequestHandler):
         self.redirect('/')
 
 
-class Profile(RequestHandler):
+class Profile(BaseHandler):
 
     def get(self, id):
         user_info = User.get_user_profile(id)
-        self.render('Account/Profile.html', user_info=user_info)
+        recipes = User.get_user_recipes(id)
+        self.render('Account/Profile.html', user_info=user_info, recipes=recipes)
 

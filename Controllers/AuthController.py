@@ -1,8 +1,8 @@
-from tornado.web import RequestHandler
 from Models.User import User
+from Controllers.BaseController import BaseHandler
 
 
-class AuthProxyHandler(RequestHandler):
+class AuthProxyHandler(BaseHandler):
     def initialize(self, real_handler_class):
         self.real_handler_class = real_handler_class
 

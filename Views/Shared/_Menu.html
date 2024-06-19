@@ -1,33 +1,42 @@
-
-
-<div class="d-flex flex-column align-items-center align-items-sm-start text-white  position-fixed" id="side-menu">
-    <h1 class=" d-none d-sm-inline mb-4 title">Cook Connect</h1>
+<!-- Views/Shared/_Menu.html -->
+<div class="d-flex flex-column align-items-center align-items-sm-start text-white position-fixed" id="side-menu">
+    <h1 class="d-none d-sm-inline mb-4 title">Cook Connect</h1>
     <div class="submenu mb-3">
         <span class="subtitle">Discover</span>
-         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
             <li class="nav-item">
-                <a href="/" class="nav-link  ">
+                <a href="/" class="nav-link">
                     <span class="ms-1 d-none d-sm-inline">Home</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link ">
-                    <span class="ms-1 d-none d-sm-inline">Browse</span></a>
+                <a href="#" class="nav-link">
+                    <span class="ms-1 d-none d-sm-inline">Browse</span>
+                </a>
             </li>
         </ul>
     </div>
-     <div class="submenu mt-5">
+    <div class="submenu mt-5">
         <span class="subtitle">Account</span>
-         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
+            {% if login %}
+            <li>
+                <a href="/profile/{{ current_user_id }}" class="nav-link">
+                    <span class="ms-1 d-none d-sm-inline">Profile</span>
+                </a>
+            </li>
+            {% else %}
             <li class="nav-item">
-                <a href="/login" class="nav-link  ">
+                <a href="/login" class="nav-link">
                     <span class="ms-1 d-none d-sm-inline">Login</span>
                 </a>
             </li>
             <li>
-                <a href="/register" class="nav-link ">
-                    <span class="ms-1 d-none d-sm-inline">Register</span></a>
+                <a href="/register" class="nav-link">
+                    <span class="ms-1 d-none d-sm-inline">Register</span>
+                </a>
             </li>
+            {% end %}
         </ul>
     </div>
 </div>

@@ -1,8 +1,9 @@
 from tornado.web import RequestHandler
-
 from Models.User import User
+from Controllers.BaseController import BaseHandler
 
-class Recipes(RequestHandler):
+
+class Recipes(BaseHandler):
     def get(self):
         session_token = self.get_secure_cookie("session_token")
 
