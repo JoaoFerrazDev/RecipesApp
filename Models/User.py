@@ -58,7 +58,7 @@ class User:
         if session_token in sessions:
             del sessions[session_token]
 
-    def get_user_info(session_token):
+    def get_user_info(session_token:str):
         user = User.get_user_from_session(session_token)
         if user:
             return {
@@ -79,3 +79,6 @@ class User:
         recipes = _query('SELECT * FROM recipes WHERE userid == ?', (id))
         return recipes
 
+    def get_user_profile(id):
+        user_info = _query('SELECT * FROM users WHERE id == ?', (id))
+        return user_info

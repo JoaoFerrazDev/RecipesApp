@@ -33,3 +33,11 @@ class Login(RequestHandler):
 
         self.set_secure_cookie("session_token", session_token)
         self.redirect('/')
+
+
+class Profile(RequestHandler):
+
+    def get(self, id):
+        user_info = User.get_user_profile(id)
+        self.render('Auth/Profile.html', user_info=user_info)
+

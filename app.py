@@ -11,6 +11,7 @@ def make_app():
         (r"/", HomeController.Home),
         (r"/register", UserController.Register),
         (r"/login", UserController.Login),
+        (r"/profile/(\d+)", UserController.Profile),
         (r"/create-recipe", AuthController.AuthProxyHandler, dict(real_handler_class=RecipesController.Create)),
         (r"/my-recipes", AuthController.AuthProxyHandler, dict(real_handler_class=AccountController.Recipes)),
     ], template_path="Views", static_path="static", cookie_secret="QwErTy123456")
@@ -19,9 +20,9 @@ def make_app():
 if __name__ == "__main__":
     app = make_app()
     app.static_folder = 'static'
-    app.listen(5001)
+    app.listen(8001)
     db = Database()
-    print("Starting Tornado server on http://localhost:5001")
+    print("Starting Tornado server on http://localhost:8001")
     tornado.ioloop.IOLoop.current().start()
 
 
