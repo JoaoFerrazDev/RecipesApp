@@ -25,7 +25,7 @@ class Create(BaseHandler):
                 image_url = self.save_image(image_file[0])
 
             recipe = Recipe(title, description, image_url, ingredients, instructions)
-            recipe.save()
+            recipe.save(self.template_variables["current_user_id"])
             self.redirect('/')
         except ValueError as e:
             self.write(str(e))
@@ -63,3 +63,4 @@ class RecipePage(BaseHandler):
         recipe = Recipe.get_recipe_by_id(id)
         print(f"Debug: Query Result for recipe_id {id} -> {recipe[0]}")
         self.render('Recipe/Index.html', recipe=recipe)
+

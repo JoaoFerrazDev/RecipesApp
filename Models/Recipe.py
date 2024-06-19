@@ -1,4 +1,5 @@
 # models/recipe.py
+from Models.User import User
 from Services.DBContext import Database, _query
 
 
@@ -21,12 +22,12 @@ class Recipe:
         for observer in cls._observers:
             observer.update(recipe)
 
-    def save(self):
+    def save(self,id):
         query = '''
-            INSERT INTO recipes (title, description, image, ingredients, instructions)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO recipes (title, description, image, ingredients, instructions,user_id)
+            VALUES (?, ?, ?, ?, ?,?)
         '''
-        _query(query, (self.title, self.description, self.image, self.ingredients, self.instructions))
+        _query(query, (self.title, self.description, self.image, self.ingredients, self.instructions,id))
 
     @staticmethod
     def get_all_recipes():
@@ -35,7 +36,7 @@ class Recipe:
 
     @staticmethod
     def get_recipe_by_id(recipe_id):
-        query = 'SELECT id, title, description, image, ingredients, instructions FROM recipes WHERE id = ?'
+        query = 'SELECT id, title, description, image, ingredients, instructions, user_id FROM recipes WHERE id = ?'
         return _query(query, (recipe_id,))
 
     @staticmethod
@@ -47,3 +48,4 @@ class Recipe:
     def get_recent_recipes():
         query = 'SELECT id, title, description, image, ingredients, instructions FROM recipes ORDER BY id DESC LIMIT 6'
         return _query(query)
+

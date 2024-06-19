@@ -14,6 +14,19 @@ class Recipes(BaseHandler):
             self.render('Recipes/Index.html', recipes=recipes)
 
 
+class Follow(BaseHandler):
+    def post(self):
+        try:
+            user_id = self.get_argument('user_id')
+            recipe_id = self.get_argument('recipe_id')
+            print(user_id is not self.template_variables["current_user_id"])
+            if user_id is not self.template_variables["current_user_id"]:
+                User.follow_user(self.template_variables["current_user_id"], user_id)
+            self.redirect(f"/recipe/{recipe_id}")
+        except ValueError as e:
+            self.write(str(e))
+            self.redirect('/')
+
 class Notifications(RequestHandler):
     def get(self):
         notifications = User.get_user_info().notifications.all()

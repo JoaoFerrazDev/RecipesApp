@@ -87,3 +87,8 @@ class User:
         user_data = _query('SELECT u.*, COUNT(f.follower) AS numFollowing, (SELECT COUNT(*) FROM followers WHERE following = u.id) As numFollowers FROM users u LEFT JOIN followers f ON f.follower = u.id WHERE u.id == ? GROUP BY u.id;', (id))
         user_info = User(*user_data[0])
         return user_info
+
+    @staticmethod
+    def follow_user(current_user_id, followed_user_id):
+        query = 'INSERT INTO followers (follower,following) VALUES (?,?)'
+        return _query(query, (current_user_id, followed_user_id))

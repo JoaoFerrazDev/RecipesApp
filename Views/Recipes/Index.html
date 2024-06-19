@@ -2,8 +2,17 @@
 
 {% block content %}
     {% if recipes %}
-        <h1>Recipes</h1>
-        <div class="container">
+
+      <div class="px-5 mt-5" >
+          <div class="row justify-content-between align-items-center">
+              <div class="col-auto">
+                   <h2>My Recipes</h2>
+              </div>
+              <div class="col-auto ">
+                  <a href="/create-recipe" class="btn btn-primary">Create Recipe</a>
+              </div>
+          </div>
+          <hr/>
             <div class="row">
                 {% for recipe in recipes %}
                     <div class="col-12 col-lg-6 col-xl-4">

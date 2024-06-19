@@ -6,19 +6,27 @@
          <div class="px-5 mt-5" id="recipe-page">
             <div class="row mt-4">
                 <div class="col-12 col-lg-6">
-                      <div class="recipe-card me-5">
-                             {% if recipe[0][0] %}
+                      <div class="recipe-card mb-0 me-5">
+                             {% if recipe[0][3] %}
                             <img src="{{ recipe[0][3] }}">
                             {% else %}
                             <img src="/static/images/nologo.png">
                             {% end %}
                         </div>
                 </div>
-                 <div class="col-12 col-lg-6">
+                 <div class="col-12 col-lg-6 d-flex flex-column justify-content-between">
                       <div class="recipe-card">
                             <span>{{ recipe[0][1] }}</span>
                             <p>{{ recipe[0][2] }}</p>
+                            <p><strong>Ingredientes: </strong> {{ recipe[0][4] }}</p>
+                            <p><strong>Instruções: </strong> {{ recipe[0][5] }}</p>
+
                         </div>
+                        <form action="/follow" method="post" class="mt-auto d-block">
+                            <input type="hidden" value="{{ recipe[0][6] }}" name="user_id">
+                            <input type="hidden" value="{{ recipe[0][0] }}" name="recipe_id">
+                            <button type="submit" class="btn btn-primary">Follow User</button>
+                        </form>
                 </div>
             </div>
         </div>

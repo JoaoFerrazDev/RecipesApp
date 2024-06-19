@@ -80,3 +80,6 @@ h2{
 #recipe-page .recipe-card span{
     font-size:24px;
 }
+a{
+    text-decoration: none!important;
+}
