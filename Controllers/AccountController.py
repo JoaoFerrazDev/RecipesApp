@@ -13,6 +13,7 @@ class Recipes(BaseHandler):
             recipes = User.get_user_recipes(user_info['id'])
             self.render('Recipes/Index.html', recipes=recipes)
 
+
 class Notifications(RequestHandler):
     def get(self):
         notifications = User.get_user_info().notifications.all()

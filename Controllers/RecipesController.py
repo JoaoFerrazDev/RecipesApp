@@ -7,7 +7,7 @@ from Controllers.BaseController import BaseHandler
 
 class Create(BaseHandler):
     def get(self):
-        self.render('Recipes/Create.html')
+        self.render(template_name='Recipes/Create.html')
 
     def post(self):
         try:

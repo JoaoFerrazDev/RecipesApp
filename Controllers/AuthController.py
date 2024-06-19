@@ -1,28 +1,44 @@
-from Models.User import User
+# Controllers/AuthProxyHandler.py
+
 from Controllers.BaseController import BaseHandler
+from Models.User import User
 
 
 class AuthProxyHandler(BaseHandler):
     def initialize(self, real_handler_class):
         self.real_handler_class = real_handler_class
 
-    def get(self):
-        session_token = self.get_secure_cookie("session_token")
-        print(f"Session Token: {session_token}")  # Debugging line to check the token
+    def prepare(self):
+        super().prepare()
+        self.session_token = self.get_secure_cookie("session_token")
+        self.user = None
 
-        if session_token:
-            session_token = session_token.decode('utf-8')
-            print(f"Decoded Session Token: {session_token}")  # Debugging line to check decoded token
-            user = User.get_user_from_session(session_token)
-            if user:
-                real_handler = self.real_handler_class(self.application, self.request)
-                real_handler._transforms = self._transforms
-                real_handler.get()
-                return
+        if self.session_token:
+            self.session_token = self.session_token.decode('utf-8')
+            self.user = User.get_user_from_session(self.session_token)
 
-        self.redirect('/login')
+        if not self.user:
+            self.redirect('/login')
+            return
 
-    def post(self):
+    def delegate_request(self):
         real_handler = self.real_handler_class(self.application, self.request)
         real_handler._transforms = self._transforms
-        real_handler.post()
+        real_handler.current_user = self.user
+        real_handler.template_variables = self.template_variables
+        real_handler.prepare = self.prepare  # Pass the prepare method
+        return real_handler
+
+    def get(self):
+        if self.user:
+            real_handler = self.delegate_request()
+            real_handler.get()
+        else:
+            self.redirect('/login')
+
+    def post(self):
+        if self.user:
+            real_handler = self.delegate_request()
+            real_handler.post()
+        else:
+            self.redirect('/login')

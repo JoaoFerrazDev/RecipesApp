@@ -4,17 +4,21 @@ from Models.User import User
 
 class BaseHandler(tornado.web.RequestHandler):
     def get_current_user(self):
-        user_id = self.get_secure_cookie("session_token")
-        if user_id:
-            return user_id.decode("utf-8")
+        session_token = self.get_secure_cookie("session_token")
+        if session_token:
+            return session_token.decode("utf-8")
         return None
 
     def prepare(self):
         self.login = False
-        self.current_user_id = -1
-        if User.get_user_info(self.get_current_user()):
-            self.current_user_id = User.get_user_info(self.get_current_user())['id']
-            self.login = True
+        self.current_user_id = None
+        current_user = self.get_current_user()
+
+        if current_user:
+            user_info = User.get_user_info(current_user)
+            if user_info:
+                self.current_user_id = user_info['id']
+                self.login = True
 
         self.template_variables = {
             "login": self.login,
