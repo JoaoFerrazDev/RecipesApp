@@ -45,24 +45,38 @@ h2{
 
 .recipe-card{
     margin-bottom: 30px;
-    img{
-        width: 100%;
-        aspect-ratio: 3/2;
-        object-fit: cover;
-        border-radius: 10px;
+}
+.recipe-card img{
+    width: 100%;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+    border-radius: 10px;
 
-    }
-    span{
-        margin-top:10px;
-        display: block;
-        font-size:18px;
-        color:black;
-        font-weight: 600;
-        text-align: left;
-    }
-    p{
-        color:#828282;
-        font-size:16px;
-        text-align: left;
-    }
+}
+.recipe-card span{
+    margin-top:10px;
+    display: block;
+    font-size:18px;
+    color:black;
+    font-weight: 600;
+    text-align: left;
+}
+.recipe-card p{
+    color:#828282;
+    font-size:16px;
+    text-align: left;
+}
+
+
+#recipe-page .recipe-card img{
+        aspect-ratio: 1/1;
+        margin-right: 5%;
+}
+
+#recipe-page{
+    margin:0 5%;
+}
+
+#recipe-page .recipe-card span{
+    font-size:24px;
 }
