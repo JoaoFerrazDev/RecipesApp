@@ -53,7 +53,7 @@ h2{
     border-radius: 10px;
 
 }
-.recipe-card span{
+.recipe-card span, .my-recipe-card span{
     margin-top:10px;
     display: block;
     font-size:18px;
@@ -61,7 +61,7 @@ h2{
     font-weight: 600;
     text-align: left;
 }
-.recipe-card p{
+.recipe-card p, .my-recipe-card p{
     color:#828282;
     font-size:16px;
     text-align: left;
@@ -83,3 +83,51 @@ h2{
 a{
     text-decoration: none!important;
 }
+
+.my-recipe-card {
+    width: 100%;
+    gap:20px;
+ display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.my-recipe-card{
+    border:1px solid #E0E0E0;
+    padding: 20px;
+    border-radius: 5px;
+}
+.my-recipe-card img{
+    height: 100px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.my-recipe-card .actions img{
+    width: 40px;
+    object-fit: contain;
+    height: fit-content;
+    transition:all 0.3s ease;
+    padding: 5px;
+}
+.my-recipe-card .actions img:hover{
+    width: 40px;
+    object-fit: contain;
+    background:#D6D2C8;
+}
+.my-recipe-card .actions{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:15px;
+}
+.my-recipe-card button{
+    background:none;
+    border:none;
+    box-shadow:none;
+    outline: none;
+    padding: 0;
+    margin:0;
+}
+
