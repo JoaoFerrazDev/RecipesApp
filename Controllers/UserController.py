@@ -36,6 +36,17 @@ class Login(BaseHandler):
         self.redirect('/')
 
 
+class Logout(BaseHandler):
+    def get(self):
+        session_token = self.get_secure_cookie("session_token")
+
+        if session_token:
+            session_token = session_token.decode('utf-8')
+            User.logout(session_token)
+
+        self.redirect('/login')
+
+
 class Profile(BaseHandler):
 
     def get(self, id):

@@ -4,6 +4,20 @@
     {% if recipe %}
 
          <div class="px-5 mt-5" id="recipe-page">
+             <div class="row">
+                <div class="col-12">
+                    <div class="d-flex flex-row align-items-center gap-3">
+                          <a href="/edit-profile/{{ user_info.id }}" class="profile-picture">
+                     {% if user_info.image %}
+                    <img src="{{ user_info.image }}" alt="User Image">
+                    {% else %}
+                    <img src="../../static/images/profile-user.png">
+                    {% end %}
+                    </a>
+                    <span>{{ user_info.username }}</span>
+                    </div>
+                </div>
+             </div>
             <div class="row mt-4">
                 <div class="col-12 col-lg-6">
                       <div class="recipe-card mb-0 me-5">

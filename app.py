@@ -11,13 +11,17 @@ def make_app():
         (r"/", HomeController.Home),
         (r"/register", UserController.Register),
         (r"/login", UserController.Login),
+        (r"/logout", UserController.Logout),
         (r"/profile/(\d+)", UserController.Profile),
         (r"/create-recipe", AuthController.AuthProxyHandler, dict(real_handler_class=RecipesController.Create)),
         (r"/edit-recipe/(\d+)", AuthController.AuthProxyHandler, dict(real_handler_class=RecipesController.Edit)),
         (r"/edit-profile/(\d+)", AuthController.AuthProxyHandler, dict(real_handler_class=UserController.Edit)),
         (r"/my-recipes", AuthController.AuthProxyHandler, dict(real_handler_class=AccountController.Recipes)),
+        (r"/my-followers", AuthController.AuthProxyHandler, dict(real_handler_class=AccountController.Followers)),
+        (r"/my-subscriptions", AuthController.AuthProxyHandler, dict(real_handler_class=AccountController.Subscriptions)),
         (r"/recipe/(\d+)", RecipesController.RecipePage),
         (r"/follow", AuthController.AuthProxyHandler, dict(real_handler_class=AccountController.Follow)),
+        (r"/delete-recipe/(\d+)", AuthController.AuthProxyHandler, dict(real_handler_class=RecipesController.Delete)),
         (r"/notifications", AuthController.AuthProxyHandler, dict(real_handler_class=AccountController.Notifications)),
     ], template_path="Views", static_path="static", cookie_secret="QwErTy123456")
 

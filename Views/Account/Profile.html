@@ -8,12 +8,12 @@
                  {% if user_info.image %}
                 <img src="{{ user_info.image }}" alt="User Image">
                 {% else %}
-                <img src="/static/images/nologo.png">
+                <img src="/static/images/profile-user.png">
                 {% end %}
             </a>
             <span>{{ user_info.username }}</span>
         </div>
-        <div class="col-8 d-flex justify-content-center gap-2">
+        <div class="col-8 d-flex justify-content-end align-items-center gap-2">
             <div class="num-of-followers">
                 <strong>Followers </strong>
                 : {{ user_info.numOfFollowers }}
@@ -44,7 +44,7 @@
                 {% end %}
             </div>
     {% else %}
-        <p>No recipes yet.</p>
+        <p>No posts yet.</p>
     {% end %}
 {% end %}
 </div>

@@ -83,12 +83,17 @@ class Edit(BaseHandler):
             self.redirect(f'/edit-recipe/{recipe_id}')
 
 
+class Delete(BaseHandler):
+    def post(self, id):
+        Recipe.delete_recipe(id)
+        self.redirect('/my-recipes')
+
+
 class RecipePage(BaseHandler):
     def get(self, id):
-        print("recipe")
         recipe = Recipe.get_recipe_by_id(id)
-        print(f"Debug: Query Result for recipe_id {id} -> {recipe[0]}")
-        self.render('Recipe/Index.html', recipe=recipe)
+        user_info = User.get_user_profile(recipe[0][6])
+        self.render('Recipe/Index.html', recipe=recipe, user_info=user_info)
 
 
 def save_image(image_file):

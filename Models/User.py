@@ -85,8 +85,15 @@ class User:
         recipes = _query('SELECT * FROM recipes WHERE user_id = ?', (user_id,))
         return recipes
 
+    def get_user_followers(id):
+        followers = _query('SELECT * FROM followers WHERE following = ?', (id,))
+        return followers
+    def get_user_subscriptions(id):
+        followers = _query('SELECT * FROM followers WHERE following = ?', (id,))
+        return followers
+
     def  get_user_profile(id):
-        user_data = _query('SELECT u.*, COUNT(f.follower) AS numFollowing, (SELECT COUNT(*) FROM followers WHERE following = u.id) As numFollowers FROM users u LEFT JOIN followers f ON f.follower = u.id WHERE u.id == ? GROUP BY u.id;', (id))
+        user_data = _query('SELECT u.*, COUNT(f.follower) AS numFollowing, (SELECT COUNT(*) FROM followers WHERE following = u.id) As numFollowers FROM users u LEFT JOIN followers f ON f.follower = u.id WHERE u.id == ? GROUP BY u.id;', (id,))
         user_info = User(*user_data[0])
         return user_info
 
