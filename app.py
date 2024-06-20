@@ -13,7 +13,7 @@ def make_app():
         (r"/login", UserController.Login),
         (r"/profile/(\d+)", UserController.Profile),
         (r"/create-recipe", AuthController.AuthProxyHandler, dict(real_handler_class=RecipesController.Create)),
-        (r"/edit-recipe", AuthController.AuthProxyHandler, dict(real_handler_class=RecipesController.Edit)),
+        (r"/edit-recipe/(\d+)", AuthController.AuthProxyHandler, dict(real_handler_class=RecipesController.Edit)),
         (r"/my-recipes", AuthController.AuthProxyHandler, dict(real_handler_class=AccountController.Recipes)),
         (r"/recipe/(\d+)", RecipesController.RecipePage),
         (r"/follow", AuthController.AuthProxyHandler, dict(real_handler_class=AccountController.Follow)),
