@@ -1,48 +1,60 @@
 {% extends "../Structure/layout.html" %}
 
 {% block content %}
-        <div id="create-page">
-            <div class="p-5">
-                 <form method="post" action="/edit-recipe" class="row justify-content-center" >
-                       <div class="row justify-content-between align-items-center">
-                              <div class="col-8 ">
-                                <h2>New Recipe</h2>
-                            </div>
-                            <div class="col-4 text-end">
-                                <a href="/">
-                                    <img src="../../static/images/arrow.png" width="60">
-                                </a>
-                            </div>
-                       </div>
-                      <div class="row form">
-                            <div class="col-12  mt-5">
-                                <div class="form-input">
-                                     <label>Name</label>
-                                    <input type="text" name="name" placeholder="" id="name">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-input">
-                                 <label>Description</label>
-                                <input type="text" name="description" id="description" placeholder="">
-                                </div>
-                             <div class="col-12">
-                                <div class="form-input">
-                                <label>Ingredients</label>
-                                <input type="text" name="ingredients" id="ingredients" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-12 form-input">
-                                <div class="form-input">
-                                 <label>Instructions</label>
-                                <input type="text" name="instructions" id="instructions" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-12 form-input">
-                                <button type="submit" class="ms-auto btn btn-primary">Save</button>
-                            </div>
+    <div id="edit-page">
+        <div class="p-5">
+            <form method="post" action="/edit-recipe/{{ recipe[0] }}" class="row justify-content-center" enctype="multipart/form-data">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-8">
+                        <h2>Edit Recipe</h2>
+                    </div>
+                    <div class="col-4 text-end">
+                        <a href="/">
+                            <img src="../../static/images/arrow.png" width="60">
+                        </a>
+                    </div>
+                </div>
+                <div class="row form">
+                    <div class="col-12 mt-5">
+                        <div class="form-input">
+                            <label>Title</label>
+                            <input type="text" name="title" id="title" value="{{ recipe[1] }}">
                         </div>
-                </form>
-            </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-input">
+                            <label>Description</label>
+                            <input type="text" name="description" id="description" value="{{ recipe[2] }}">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-input">
+                            <label>Ingredients</label>
+                            <input type="text" name="ingredients" id="ingredients" value="{{ recipe[4] }}">
+                        </div>
+                    </div>
+                    <div class="col-12 form-input">
+                        <div class="form-input">
+                            <label>Instructions</label>
+                            <input type="text" name="instructions" id="instructions" value="{{ recipe.[5] }}">
+                        </div>
+                    </div>
+                    <div class="col-12 form-input">
+                        <div class="form-input">
+                            <label>Image</label>
+                            <input type="file" name="image" id="image">
+                        </div>
+                        {% if recipe.image_url %}
+                            <div class="mt-2">
+                                <img src="{{ recipe[3] }}" width="150" alt="Recipe Image">
+                            </div>
+                        {% end %}
+                    </div>
+                    <div class="col-12 form-input">
+                        <button type="submit" class="ms-auto btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </form>
         </div>
+    </div>
 {% end %}

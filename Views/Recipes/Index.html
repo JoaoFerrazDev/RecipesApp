@@ -15,17 +15,29 @@
           <hr/>
             <div class="row">
                 {% for recipe in recipes %}
-                    <div class="col-12 col-lg-6 col-xl-4">
-                          <div class="recipe-card">
-                              <a href="/recipe/{{ recipe[0] }}">
-                                    {% if recipe[3] %}
-                                    <img src="{{ recipe[3] }}">
-                                    {% else %}
-                                    <img src="/static/images/nologo.png">
-                                    {% end %}
-                                    <span>{{ recipe[1] }}</span>
+                    <div class="col-12 ">
+                          <div class="my-recipe-card">
+                               <a href="/recipe/{{ recipe[0] }}" class="d-flex flex-row gap-4">
+                                        {% if recipe[3] %}
+                                <img src="{{ recipe[3] }}">
+                                {% else %}
+                                <img src="/static/images/nologo.png">
+                                {% end %}
+                                <div>
+                                  <span>{{ recipe[1] }}</span>
                                     <p>{{ recipe[2] }}</p>
-                              </a>
+                                 </div>
+                               </a>
+                                <div class="actions">
+                                    <a href="/edit-recipe/{{ recipe[0] }}">
+                                      <img src="../../static/images/edit.png">
+                                    </a>
+                                    <form action="/delete-recipe" method="post" >
+                                        <input type="hidden" value="{{ recipe[0] }}" name="recipe_id">
+                                       <button type="submit"><img src="../../static/images/delete.png"></button>
+                                    </form>
+
+                                </div>
                             </div>
                     </div>
                 {% end %}
