@@ -29,10 +29,13 @@ class AuthProxyHandler(BaseHandler):
         real_handler.prepare = self.prepare  # Pass the prepare method
         return real_handler
 
-    def get(self):
+    def get(self, argument=None):
         if self.user:
             real_handler = self.delegate_request()
-            real_handler.get()
+            if argument is None:
+                real_handler.get()
+            else:
+                real_handler.get(argument)
         else:
             self.redirect('/login')
 
