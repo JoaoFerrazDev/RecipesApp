@@ -34,6 +34,7 @@ class Database:
                   email TEXT NOT NULL UNIQUE,
                   password TEXT NOT NULL,
                   date_of_birth TEXT NOT NULL,
+                  image TEXT NULL,
                   state TEXT NOT NULL DEFAULT 'public'
               )
           ''')

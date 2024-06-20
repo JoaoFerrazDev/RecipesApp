@@ -29,6 +29,15 @@ class Recipe:
         '''
         _query(query, (self.title, self.description, self.image, self.ingredients, self.instructions,id))
 
+    def update(self, recipe_id):
+        query = '''
+            UPDATE recipes
+            SET title = ?, description = ?, image = ?, ingredients = ?, instructions = ?
+            WHERE id = ?
+        '''
+        _query(query,
+               (self.title, self.description, self.image, self.ingredients, self.instructions, recipe_id))
+
     @staticmethod
     def get_all_recipes():
         query = 'SELECT id, title, description, image, ingredients, instructions FROM recipes'

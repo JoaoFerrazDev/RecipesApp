@@ -7,7 +7,7 @@ sessions = {}
 
 
 class User:
-    def __init__(self, id, username, email, password, date_of_birth, state="public", num_of_following=0, num_of_followers=0):
+    def __init__(self, id, username, email, password, date_of_birth, state="public", num_of_following=0, num_of_followers=0, image=""):
         self.id = id
         self.username = username
         self.email = email
@@ -19,7 +19,8 @@ class User:
         self.numOfFollowing = num_of_following
         self.subscriptions = []
         self.recipes = [],
-        self.notifications = []
+        self.notifications = [],
+        self.image = image
 
 
     @staticmethod
@@ -74,7 +75,8 @@ class User:
                 'followers': user.followers,
                 'recipes': user.recipes,
                 'notifications': user.notifications,
-                'subscriptions': user.subscriptions
+                'subscriptions': user.subscriptions,
+                'image': user.image
             }
         else:
             return None
@@ -83,10 +85,19 @@ class User:
         recipes = _query('SELECT * FROM recipes WHERE user_id = ?', (user_id,))
         return recipes
 
-    def get_user_profile(id):
+    def  get_user_profile(id):
         user_data = _query('SELECT u.*, COUNT(f.follower) AS numFollowing, (SELECT COUNT(*) FROM followers WHERE following = u.id) As numFollowers FROM users u LEFT JOIN followers f ON f.follower = u.id WHERE u.id == ? GROUP BY u.id;', (id))
         user_info = User(*user_data[0])
         return user_info
+
+    def update(self, id):
+        query = '''
+            UPDATE users
+            SET username = ?, email = ?, date_of_birth = ?, state = ?, password = ?, image = ?
+            WHERE id = ?
+        '''
+        _query(query,
+               (self.username, self.email, self.date_of_birth, self.state, self.password, id, self.image))
 
     @staticmethod
     def follow_user(current_user_id, followed_user_id):

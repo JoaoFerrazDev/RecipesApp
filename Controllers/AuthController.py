@@ -39,9 +39,12 @@ class AuthProxyHandler(BaseHandler):
         else:
             self.redirect('/login')
 
-    def post(self):
+    def post(self, argument=None):
         if self.user:
             real_handler = self.delegate_request()
-            real_handler.post()
+            if argument is None:
+                real_handler.post()
+            else:
+                real_handler.post(argument)
         else:
             self.redirect('/login')

@@ -17,12 +17,10 @@ class Create(BaseHandler):
             instructions = self.get_argument('instructions')
 
             # Handle image upload
-            print("Received files: ", self.request.files)
             image_file = self.request.files.get('image', None)
             image_url = ''
             if image_file:
-                # Save the uploaded image
-                image_url = self.save_image(image_file[0])
+                image_url = save_image(image_file[0])
 
             recipe = Recipe(title, description, image_url, ingredients, instructions)
             recipe.save(self.template_variables["current_user_id"])
@@ -30,31 +28,6 @@ class Create(BaseHandler):
         except ValueError as e:
             self.write(str(e))
             self.redirect('/create-recipe')
-
-    def save_image(self, image_file):
-        try:
-            upload_path = 'static/uploads'
-            if not os.path.exists(upload_path):
-                os.makedirs(upload_path)
-
-            image_filename = image_file['filename']
-            image_path = os.path.join(upload_path, image_filename)
-
-            # Save the image
-            with open(image_path, 'wb') as f:
-                f.write(image_file['body'])
-
-            # Check if the file is written
-            if os.path.exists(image_path):
-                print(f"Image saved successfully: {image_path}")
-            else:
-                print(f"Failed to save image: {image_path}")
-
-            # Return the relative URL of the saved image
-            return f'/static/uploads/{image_filename}'
-        except Exception as e:
-            print(f"Error saving image: {str(e)}")
-            return ''
 
 
 class Edit(BaseHandler):
@@ -83,23 +56,27 @@ class Edit(BaseHandler):
                 image_url = save_image(image_file[0])
 
             # Fetch the existing recipe
-            recipe = Recipe.get_recipe_by_id(recipe_id)
-            if not recipe:
+            recipe_data = Recipe.get_recipe_by_id(recipe_id)
+            if not recipe_data:
                 self.write("Recipe not found")
                 self.redirect('/')
                 return
+
+            # Create a Recipe object with the fetched data
+            recipe = Recipe(recipe_data[0][1], recipe_data[0][2], recipe_data[0][3],
+                            recipe_data[0][4], recipe_data[0][5])
 
             # Update recipe details
             recipe.title = title
             recipe.description = description
             recipe.ingredients = ingredients
             recipe.instructions = instructions
-
             # Update image URL if a new image is uploaded
             if image_url:
-                recipe.image_url = image_url
+                recipe.image = image_url
 
-            recipe.save(self.template_variables["current_user_id"])
+            # Update the recipe in the database
+            recipe.update(recipe_id)
             self.redirect('/my-recipes')
         except ValueError as e:
             self.write(str(e))
