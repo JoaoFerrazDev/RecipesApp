@@ -1,20 +1,33 @@
-{% extends "layout.html" %}
+{% extends "../Structure/layout.html" %}
 
 {% block content %}
-    {% if followers %}
-        <h1>Subscriptions</h1>
-        <div class="container">
+<div class="px-5 mt-5" >
+    {% if subscriptions %}
             <div class="row">
-                {% for subscription in subcriptions %}
-                    <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="notification-card">
-                            <span>{{ subscription }}</span>
+                <div class="col-12">
+                      <h2 class="mb-3">Subscriptions </h2>
+                </div>
+                {% for subscription in subscriptions %}
+                    <div class="col-12 ">
+                        <div class="notification-card d-flex flex-row align-items-center gap-3">
+                               {% if subscription[5] %}
+                            <img src="../..{{ subscription[5] }}" alt="User Image">
+                            {% else %}
+                            <img src="../../static/images/profile-user.png">
+                            {% end %}
+                            <span>{{ subscription[1] }}</span>
                         </div>
                     </div>
                 {% end %}
             </div>
-        </div>
     {% else %}
+      <div class="row">
+                <div class="col-12">
+                      <h2>Subscriptions</h2>
+                </div>
+
+            </div>
         <p>No subscriptions yet.</p>
     {% end %}
+      </div>
 {% end %}

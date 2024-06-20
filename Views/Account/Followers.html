@@ -5,11 +5,16 @@
     {% if followers %}
             <div class="row">
                 <div class="col-12">
-                      <h2>Followers {{ followers }}</h2>
+                      <h2 class="mb-3">Followers </h2>
                 </div>
                 {% for follower in followers %}
-                    <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="notification-card">
+                    <div class="col-12">
+                        <div class="notification-card d-flex flex-row align-items-center gap-3">
+                               {% if follower[5] %}
+                            <img src="../..{{ follower[5] }}" alt="User Image">
+                            {% else %}
+                            <img src="../../static/images/profile-user.png">
+                            {% end %}
                             <span>{{ follower[1] }}</span>
                         </div>
                     </div>

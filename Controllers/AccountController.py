@@ -65,9 +65,5 @@ class Followers(BaseHandler):
 
 class Subscriptions(BaseHandler):
     def get(self):
-        session_token = self.get_secure_cookie("session_token")
-
-        if session_token:
-            session_token = session_token.decode('utf-8')
-            subscriptions = User.get_user_info(session_token).subscriptions.all()
-            self.render('Account/Subscriptions.html', subscriptions=subscriptions)
+        subscriptions = User.get_user_subscriptions(self.template_variables["current_user_id"])
+        self.render('Account/Subscriptions.html', subscriptions=subscriptions)
