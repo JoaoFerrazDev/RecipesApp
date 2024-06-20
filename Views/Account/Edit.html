@@ -33,24 +33,20 @@
                             <input type="text" name="password" id="password" value="{{ user.password }}">
                         </div>
                     </div>
-                    <div class="col-12 form-input">
-                        <div class="form-input">
-                            <label>State of Profile</label>
-                            <input type="text" name="state" id="state" value="{{ user.state }}">
-                        </div>
-                    </div>
                      <div class="col-12 ">
-                                  <div class=" form-input">
+                            <div class=" form-input">
+                                <label for="birth">Data de Nascimento</label>
                                 <input type="date" name="birth" id="birth" value="{{ user.date_of_birth }}">
                             </div>
+                     </div>
                     <div class="col-12 form-input">
                         <div class="form-input">
                             <label>Image</label>
-                            <input type="file" name="image" id="image">
+                            <input type="file" placeholder="{{ user.image }}" name="image" id="image">
                         </div>
                         {% if user.image %}
                             <div class="mt-2">
-                                <img src="{{ user.image }}" width="150" alt="Recipe Image">
+                                <img src="../..{{ user.image }}" width="150" alt="Recipe Image">
                             </div>
                         {% end %}
                     </div>

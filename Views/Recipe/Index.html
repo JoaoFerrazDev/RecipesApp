@@ -36,11 +36,19 @@
                             <p><strong>Instruções: </strong> {{ recipe[0][5] }}</p>
 
                         </div>
+                     {% if can_follow %}
                         <form action="/follow" method="post" class="mt-auto d-block">
                             <input type="hidden" value="{{ recipe[0][6] }}" name="user_id">
                             <input type="hidden" value="{{ recipe[0][0] }}" name="recipe_id">
                             <button type="submit" class="btn btn-primary">Follow User</button>
                         </form>
+                     {% elif not my_recipe %}
+                        <form action="/unfollow" method="post" class="mt-auto d-block">
+                            <input type="hidden" value="{{ recipe[0][6] }}" name="user_id">
+                            <input type="hidden" value="{{ recipe[0][0] }}" name="recipe_id">
+                            <button type="submit" class="btn btn-primary">Unfollow User</button>
+                        </form>
+                     {% end %}
                 </div>
             </div>
         </div>

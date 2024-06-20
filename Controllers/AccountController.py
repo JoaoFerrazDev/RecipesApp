@@ -26,8 +26,23 @@ class Follow(BaseHandler):
                 # Notify the followed user via a notification service
                 notification_service = NotificationService()
                 print(user_id)
-                notification_service.notify(user_id, self.template_variables["current_user_id"])
+                notification_service.notify_follow(user_id, self.template_variables["current_user_id"])
 
+            self.redirect(f"/recipe/{recipe_id}")
+        except ValueError as e:
+            self.write(str(e))
+            self.redirect('/')
+
+
+class Unfollow(BaseHandler):
+    def post(self):
+        try:
+            user_id = self.get_argument('user_id')
+            recipe_id = self.get_argument('recipe_id')
+            User.unfollow_user(self.template_variables["current_user_id"], user_id)
+            # Notify the followed user via a notification service
+            notification_service = NotificationService()
+            notification_service.notify_unfollow(user_id, self.template_variables["current_user_id"])
             self.redirect(f"/recipe/{recipe_id}")
         except ValueError as e:
             self.write(str(e))

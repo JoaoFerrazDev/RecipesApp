@@ -70,7 +70,6 @@ class Edit(BaseHandler):
         try:
             username = self.get_argument('username')
             email = self.get_argument('email')
-            state = self.get_argument('state')
             password = self.get_argument('password')
             date_of_birth = self.get_argument('birth')
 
@@ -90,11 +89,10 @@ class Edit(BaseHandler):
 
             # Create a Recipe object with the fetched data
             user = User(id, username=user_data.username, email=user_data.email, password=user_data.password,
-                        date_of_birth=user_data.date_of_birth, state=user_data.state, image=user_data.image)
+                        date_of_birth=user_data.date_of_birth, image=user_data.image)
 
             # Update recipe details
             user.username = username
-            user.state = state
             user.email = email
             user.date_of_birth = date_of_birth
             user.password = password

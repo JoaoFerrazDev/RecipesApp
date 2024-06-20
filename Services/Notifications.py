@@ -4,9 +4,15 @@ from Services.DBContext import _query
 class NotificationService:
 
     @staticmethod
-    def notify(followed_id, follower_id):
+    def notify_follow(followed_id, follower_id):
         username = _query('SELECT username FROM users WHERE id = ?', (follower_id,))
         notification = f"User {username[0][0]} started following you."
+        _query('INSERT INTO notifications(notification, user_id) VALUES(?, ?)', (notification, followed_id))
+
+    @staticmethod
+    def notify_unfollow(followed_id, follower_id):
+        username = _query('SELECT username FROM users WHERE id = ?', (follower_id,))
+        notification = f"User {username[0][0]} unfollowed you."
         _query('INSERT INTO notifications(notification, user_id) VALUES(?, ?)', (notification, followed_id))
 
     @staticmethod

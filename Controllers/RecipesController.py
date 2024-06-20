@@ -93,7 +93,13 @@ class RecipePage(BaseHandler):
     def get(self, id):
         recipe = Recipe.get_recipe_by_id(id)
         user_info = User.get_user_profile(recipe[0][6])
-        self.render('Recipe/Index.html', recipe=recipe, user_info=user_info)
+        can_follow = User.can_follow(self.template_variables["current_user_id"], user_info.id)
+        my_recipe = self.template_variables["current_user_id"] == user_info.id
+        if self.template_variables["current_user_id"] is None:
+            can_follow = False
+            my_recipe = True
+
+        self.render('Recipe/Index.html', recipe=recipe, user_info=user_info, can_follow=can_follow, my_recipe=my_recipe)
 
 
 def save_image(image_file):
