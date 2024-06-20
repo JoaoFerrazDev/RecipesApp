@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "../Structure/layout.html" %}
 
 {% block content %}
     {% if notifications %}
@@ -8,7 +8,7 @@
                 {% for notification in notifications %}
                     <div class="col-12 col-lg-6 col-xl-4">
                         <div class="notification-card">
-                            <span>{{ notification }}</span>
+                            <span>{{ notification[1] }}</span>
                         </div>
                     </div>
                 {% end %}

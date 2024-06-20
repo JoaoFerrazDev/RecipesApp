@@ -46,6 +46,14 @@ class Database:
                       )
                   ''')
 
+        self._cursor.execute('''
+                              CREATE TABLE IF NOT EXISTS notifications (
+                                  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                  notification TEXT NOT NULL,
+                                  user_id INT NOT NULL
+                              )
+                          ''')
+
         self._connection.commit()
 
     def get_cursor(self):
